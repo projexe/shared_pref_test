@@ -24,6 +24,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   shared_preferences: ^0.5.6+3
+  image_picker: ^0.6.1+10    #Flutter plugin for selecting images from the Android and iOS image library, and taking new pictures with the camera
+  image_cropper: 1.1.0
+  gallery_saver: 1.0.6
+
 
 dev_dependencies:
   flutter_test:
