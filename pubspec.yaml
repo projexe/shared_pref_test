@@ -25,8 +25,10 @@ dependencies:
   cupertino_icons: ^0.1.2
   shared_preferences: ^0.5.6+3
   image_picker: ^0.6.1+10    #Flutter plugin for selecting images from the Android and iOS image library, and taking new pictures with the camera
-  image_cropper: 1.1.0
-  gallery_saver: 1.0.6
+  image_cropper: ^1.2.1   #plugin for Android and iOS supports cropping images. This plugin is based on two different native libraries so it comes with different UI between these platforms.
+  gallery_saver: ^1.0.7    #Saves images and videos from network or temporary file to external storage. Both images and videos will be visible in Android Gallery and iOS Photos.
+  path_provider: ^1.6.5   #plugin for finding commonly used locations on the filesystem. Supports iOS and Android.
+
 
 
 dev_dependencies:

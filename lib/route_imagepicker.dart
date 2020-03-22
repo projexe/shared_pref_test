@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 ///-----------------------------------------------------------------------
 ///
@@ -34,7 +35,7 @@ class _RouteImagePickerState extends State<RouteImagePicker> {
   }
 
   // Uses image_picker library and to return a photograph image file
-  Future getPhoto() async {
+  Future<void> getPhoto() async {
     File photoImageFile;
     try {
       photoImageFile = await ImagePicker.pickImage(
@@ -49,11 +50,24 @@ class _RouteImagePickerState extends State<RouteImagePicker> {
 
     photoImageFile = await cropImage(photoImageFile);
 
+    String fileName = photoImageFile?.path?.split("/")?.last;
+    // for iOS write the image file to Ducuments directory so is persists
+
+    Directory docsDir = await getApplicationDocumentsDirectory();
+    debugPrint('Application documents directory : $docsDir');
+
+    var copiedImage =  photoImageFile.copySync('${docsDir.path}/${fileName}');
+
+    debugPrint('Copied image file details : ${copiedImage.path}');
+
+    photoImageFile.delete;
+
     setState(() {
-      _image = photoImageFile;
+      _image = copiedImage;
     });
     // save photo image file to the public gallery (
-    GallerySaver.saveImage(photoImageFile.path, albumName: 'AnimalFriends');
+    GallerySaver.saveImage(copiedImage.path, albumName: 'AnimalFriends');
+
   }
 
   // Uses image_picker library and to return a gallery image file
