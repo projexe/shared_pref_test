@@ -52,21 +52,21 @@ class _RouteImagePickerState extends State<RouteImagePicker> {
 
     String fileName = photoImageFile?.path?.split("/")?.last;
     // for iOS write the image file to Ducuments directory so is persists
-
+    debugPrint('Document name : $fileName');
     Directory docsDir = await getApplicationDocumentsDirectory();
     debugPrint('Application documents directory : $docsDir');
 
-    var copiedImage =  photoImageFile.copySync('${docsDir.path}/${fileName}');
+    var docsImage =  await photoImageFile.copy('${docsDir.path}/${fileName}');
 
-    debugPrint('Copied image file details : ${copiedImage.path}');
+    debugPrint('Copied docs image file details : ${docsImage.path}');
 
-    photoImageFile.delete;
+    //photoImageFile.delete;
 
     setState(() {
-      _image = copiedImage;
+      _image = docsImage;
     });
     // save photo image file to the public gallery (
-    GallerySaver.saveImage(copiedImage.path, albumName: 'AnimalFriends');
+    GallerySaver.saveImage(docsImage.path, albumName: 'AnimalFriends');
 
   }
 

@@ -51,7 +51,7 @@ class _AFIPhotoFrameState extends State<AFIPhotoFrame> {
 
   @override
   Widget build(BuildContext context) {
-    var _isPetImageExists = widget.imageFileRef.isNotEmpty ?? false;
+    var _isPetImageExists = widget?.imageFileRef?.isNotEmpty ?? false;
     _myImageFile = null;
     if (_isPetImageExists) {
       _myImageFile = File(widget.imageFileRef);
